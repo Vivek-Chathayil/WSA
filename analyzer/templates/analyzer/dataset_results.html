@@ -29,7 +29,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Quick Statistics -->
                     {% if stats %}
                     <div class="stats-grid">
@@ -247,15 +246,7 @@ function hideChart(chartId, event = null) {
         defaultBtn.classList.add('active');
         defaultBtn.setAttribute('aria-expanded', 'true');
     }
-    
-    // Scroll back to buttons
-    const chartButtons = document.querySelector('.chart-buttons');
-    if (chartButtons) {
-        window.scrollTo({
-            top: chartButtons.offsetTop - 20,
-            behavior: 'smooth'
-        });
-    }
+
 }
 
 // Initialize default view

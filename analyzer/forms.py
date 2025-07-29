@@ -49,14 +49,12 @@ class DatasetUploadForm(forms.Form):
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
             'min': '1',
-            'max': '1000',
             'value': '500'
         }),
         label='Maximum Rows to Process',
         min_value=1,
-        max_value=1000,
         initial=500,
-        help_text='Maximum number of rows to process from the dataset (default: 500, max: 1000)'
+        help_text='Maximum number of rows to process from the dataset (default: 500)'
     )
     
     def clean_dataset_file(self):
@@ -165,9 +163,9 @@ class DatasetUploadForm(forms.Form):
         if hasattr(self, 'cleaned_data') and 'dataset_file' in self.cleaned_data:
             file_size = self.cleaned_data['dataset_file'].size
             # Rough estimate: limit rows based on file size to prevent memory issues
-            if file_size > 50 * 1024 * 1024 and max_rows > 10000:  # > 50MB
+            if file_size > 500 * 1024 * 1024 and max_rows > 10000:  # > 500MB
                 raise ValidationError(
-                    "For files larger than 50MB, please limit processing to 10,000 rows or less."
+                    "For files larger than 500MB, please limit processing to 10,000 rows or less."
                 )
         
         return max_rows

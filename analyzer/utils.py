@@ -278,9 +278,9 @@ def analyze_dataset_file(file_path, max_rows=500):
                     error_count += 1
                     logger.debug(f"Failed to analyze text at row {idx}: {text[:50]}...")
 
-                # Log progress every 50 items
-                if (processed_count + error_count + skipped_count) % 50 == 0:
-                    logger.info(f"Progress: processed {processed_count}, skipped {skipped_count}, errors {error_count}")
+                # Log progress every 1000 items
+                if (processed_count + error_count ) % 1000 == 0:
+                    logger.info(f"Progress: processed {processed_count}, errors {error_count}")
                     
             except Exception as e:
                 logger.error(f"Error processing row {idx}: {e}")
@@ -289,7 +289,7 @@ def analyze_dataset_file(file_path, max_rows=500):
 
         processing_time = time.time() - start_time
         logger.info(f"Analysis completed in {processing_time:.2f} seconds")
-        logger.info(f"Total processed: {processed_count}, skipped: {skipped_count}, errors: {error_count}")
+        logger.info(f"Total processed: {processed_count}")
 
         if not results_list:
             logger.error("No valid text entries found to analyze")
