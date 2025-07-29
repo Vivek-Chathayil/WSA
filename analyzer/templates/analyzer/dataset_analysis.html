@@ -125,39 +125,8 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">
-                        <i class="fas fa-clock"></i> Recent Analyses
-                    </h5>
-                </div>
-                <div class="card-body">
-                    {% if recent_datasets %}
-                        {% for dataset in recent_datasets %}
-                            <div class="border-bottom pb-2 mb-2">
-                                <a href="{% url 'analyzer:dataset_results' dataset.id %}" class="text-decoration-none">
-                                    <strong>{{ dataset.name|truncatechars:30 }}</strong>
-                                </a>
-                                <br>
-                                <small class="text-muted">
-                                    {{ dataset.total_reviews }} reviews • {{ dataset.created_at|date:"M d, Y" }}
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="badge badge-success">{{ dataset.positive_count }}</span>
-                                    <span class="badge badge-danger">{{ dataset.negative_count }}</span>
-                                    <span class="badge badge-warning">{{ dataset.neutral_count }}</span>
-                                </small>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="text-muted">No recent analyses found.</p>
-                    {% endif %}
-                </div>
-            </div>
 
-            <div class="card shadow mt-4">
+            <div class="card col-md-4">
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">
                         <i class="fas fa-question-circle"></i> Tips
