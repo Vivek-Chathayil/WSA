@@ -1,0 +1,16 @@
+{% extends "analyzer/base.html" %}
+{% block title %}Error - Sentiment Analyzer{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Error</h1>
+        <div class="alert alert-danger">
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% else %}
+                <p>An unexpected error occurred. Please try again later.</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'analyzer:index' %}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+</div>

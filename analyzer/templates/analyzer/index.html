@@ -1,0 +1,28 @@
+{% extends "analyzer/base.html" %}
+{% block title %}Text Analysis - Sentiment Analyzer{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Welcome to Sentiment Analyzer</h1>
+        <p>Analyze individual texts or upload datasets to get sentiment insights.</p>
+        <div class="mb-4">
+            <a href="{% url 'analyzer:dataset_analysis' %}" class="btn btn-secondary">Analyze Dataset</a>
+        </div>
+        <hr>
+        <h3>Recent Text Analyses</h3>
+        {% if recent_analyses %}
+            <ul>
+                {% for analysis in recent_analyses %}
+                    <li>
+                        "{{ analysis.text|truncatechars:50 }}" - 
+                        <strong>{{ analysis.dominant_sentiment|title }}</strong>
+                        (<a href="{% url 'analyzer:results' analysis.id %}">View</a>)
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recent text analyses.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
