@@ -15,7 +15,7 @@ import traceback
 import pandas as pd
 
 from .models import SentimentAnalysis, DatasetAnalysis
-from .forms import TextAnalysisForm, DatasetUploadForm
+from .forms import  DatasetUploadForm
 from .utils import (
     get_client_ip, analyze_dataset_file, create_excel_report, load_model, create_sentiment_pie_chart,
 )
@@ -25,13 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
-    """Home page with text analysis form"""
-    form = TextAnalysisForm()
-    context = {
-        'form': form,
-        'recent_analyses': SentimentAnalysis.objects.all()[:5]
-    }
-    return render(request, 'analyzer/index.html', context)
+    return render(request, 'analyzer/index.html',)
 
 def results(request, analysis_id):
     """Display analysis results"""
