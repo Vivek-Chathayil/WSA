@@ -6,7 +6,6 @@ app_name = 'analyzer'
 urlpatterns = [
     # Main pages
     path('', views.index, name='index'),
-    path('results/<int:analysis_id>/', views.results, name='results'),
     
     # Dataset analysis
     path('dataset/', views.dataset_analysis, name='dataset_analysis'),

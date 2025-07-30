@@ -506,20 +506,6 @@ def dataset_results(request, dataset_id):
     }
     return render(request, 'analyzer/dataset_results.html', context)
 
-# Updated results view to include chart
-def results(request, analysis_id):
-    """Display analysis results with visualization"""
-    analysis = get_object_or_404(SentimentAnalysis, id=analysis_id)
-    
-    # Get chart from session if available
-    chart = request.session.pop('analysis_chart', None)
-    
-    context = {
-        'analysis': analysis,
-        'chart': chart,
-        'has_chart': chart is not None
-    }
-    return render(request, 'analyzer/results.html', context)
 
 # New API endpoint for generating charts
 def generate_chart_api(request):

@@ -4,36 +4,7 @@ from django.core.exceptions import ValidationError
 import pandas as pd
 import tempfile
 import os
-
-class TextAnalysisForm(forms.Form):
-    text = forms.CharField(
-        widget=forms.Textarea(attrs={
-            'class': 'form-control form-control-lg',
-            'rows': 6,
-            'placeholder': 'Enter your text here for sentiment analysis...',
-            'maxlength': '5000'
-        }),
-        label='Text to Analyze',
-        max_length=5000,
-        help_text='Enter up to 5000 characters for analysis'
-    )
     
-    def clean_text(self):
-        text = self.cleaned_data['text']
-        
-        # Remove extra whitespace
-        text = text.strip()
-        
-        # Check minimum length
-        if len(text) < 10:
-            raise ValidationError("Text must be at least 10 characters long.")
-        
-        # Check for potentially harmful content (basic check)
-        if text.lower().count('script') > 3 or '<' in text and '>' in text:
-            raise ValidationError("Text contains potentially harmful content.")
-        
-        return text
-
 class DatasetUploadForm(forms.Form):
     dataset_file = forms.FileField(
         widget=forms.FileInput(attrs={
