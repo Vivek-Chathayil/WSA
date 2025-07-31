@@ -12,7 +12,7 @@ class DatasetUploadForm(forms.Form):
             'accept': '.csv,.xlsx,.xls',
         }),
         label='Upload CSV or Excel Dataset',
-        help_text='Upload a CSV or Excel file with a text column for batch analysis (max 100MB)',
+        help_text='Upload a CSV or Excel file with a text column for batch analysis (max 50MB)',
         validators=[FileExtensionValidator(allowed_extensions=['csv', 'xlsx', 'xls'])]
     )
     
@@ -26,6 +26,16 @@ class DatasetUploadForm(forms.Form):
         min_value=1,
         initial=500,
         help_text='Maximum number of rows to process from the dataset (default: 500)'
+    )
+
+    keyword = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Optional: Filter by keyword (case-insensitive)'
+        }),
+        label='Keyword Filter',
+        help_text='Only analyze rows containing this keyword (optional)'
     )
     
     def clean_dataset_file(self):
@@ -134,9 +144,9 @@ class DatasetUploadForm(forms.Form):
         if hasattr(self, 'cleaned_data') and 'dataset_file' in self.cleaned_data:
             file_size = self.cleaned_data['dataset_file'].size
             # Rough estimate: limit rows based on file size to prevent memory issues
-            if file_size > 500 * 1024 * 1024 and max_rows > 10000:  # > 500MB
+            if file_size > 100 * 1024 * 1024 and max_rows > 1000:  # > 100MB
                 raise ValidationError(
-                    "For files larger than 500MB, please limit processing to 10,000 rows or less."
+                    "For files larger than 100MB, please limit processing to 1,000 rows or less."
                 )
         
         return max_rows
