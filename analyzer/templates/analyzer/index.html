@@ -9,20 +9,6 @@
             <a href="{% url 'analyzer:dataset_analysis' %}" class="btn btn-secondary">Analyze Dataset</a>
         </div>
         <hr>
-        <h3>Recent Text Analyses</h3>
-        {% if recent_analyses %}
-            <ul>
-                {% for analysis in recent_analyses %}
-                    <li>
-                        "{{ analysis.text|truncatechars:50 }}" - 
-                        <strong>{{ analysis.dominant_sentiment|title }}</strong>
-                        (<a href="{% url 'analyzer:results' analysis.id %}">View</a>)
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No recent text analyses.</p>
-        {% endif %}
     </div>
 </div>
 {% endblock %}
